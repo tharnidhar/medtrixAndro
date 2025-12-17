@@ -4,6 +4,13 @@ val newBuildDir: Directory =
         .get()
 rootProject.layout.buildDirectory.value(newBuildDir)
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
@@ -14,11 +21,4 @@ subprojects {
 
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
 }
